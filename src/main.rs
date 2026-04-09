@@ -80,59 +80,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .text()
             .with_context(|| "could not read response body")?;
         println!("{}", body);
-
-    // } else if pattern == "user list" {
-    //     let response = client
-    //         .get("http://localhost:3000/users.json")
-    //         .query(&[("api_token", api_token)])
-    //         .send()
-    //         .with_context(|| format!("could not fetch URL `{}`", "http://localhost:3000/users.json"))?;
-
-    //     println!("Status code: {}", response.status());
-
-    //     let body = response
-    //         .text()
-    //         .with_context(|| "could not read response body")?;
-    //     println!("user list: \n{}", body);
-    // } else if pattern == "projects list" {
-    //     let response = client
-    //         .get("http://localhost:3000/projects.json")
-    //         .query(&[("api_token", api_token)])
-    //         .send()
-    //         .with_context(|| format!("could not fetch URL `{}`", "http://localhost:3000/projects.json"))?;
-
-    //     println!("Status code: {}", response.status());
-
-    //     let body = response
-    //         .text()
-    //         .with_context(|| "could not read response body")?;
-    //     println!("projects list: \n{}", body);
-    // } else if pattern == "task create" {
-    //     let task_request = TaskRequest {
-    //             assigner_id: 1,
-    //             content: "New task".into(),
-    //             due_at: Some("2026-04-30".into()),
-    //             description: Some("test".into()),
-    //             project_id: None,
-    //             task_state_id: 1,
-    //             tags: None,
-    //     };
-
-    //     let response = client
-    //         .post("http://localhost:3000/tasks.json")
-    //         .query(&[("api_token", api_token)])
-    //         .json(&task_request)
-    //         .send()
-    //         .with_context(|| format!("could not fetch URL `{}`", "http://localhost:3000/tasks.json"))?;
-
-    //     println!("Status code: {}", response.status());
-
-    //     let body = response
-    //         .json::<TaskResponse>()
-    //         .with_context(|| "could not read response body")?;
-    //     println!("Task created: \n{:?}", body);
-    // } else {
-    //     println!("Searching for pattern: {}", pattern);
     }
 
     Ok(())
