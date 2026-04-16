@@ -25,18 +25,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     if pattern == "task list" {
         tasks::list_tasks(&client, &rask_api_token)?;
-        // let response = client
-        //     .get("http://localhost:3000/tasks.json") // 全員のタスクを表示するにはクエリを追加する必要あり
-        //     .query(&[("api_token", rask_api_token)]) 
-        //     .send()
-        //     .with_context(|| format!("could not fetch URL `{}`", "http://localhost:3000/tasks.json"))?;
-
-        // // println!("Status code: {}", response.status());
-
-        // let body = response
-        //     .text()
-        //     .with_context(|| "could not read response body")?;
-        // println!("{}", body);
     }
 
     Ok(())
