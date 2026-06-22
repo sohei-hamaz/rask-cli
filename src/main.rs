@@ -14,6 +14,7 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     Task(TaskCommand),
+    User(UserCommand),
 }
 
 #[derive(Args)]
@@ -22,13 +23,24 @@ struct TaskCommand {
     action: TaskAction,
 }
 
+#[derive(Args)]
+struct UserCommand {
+    #[command(subcommand)]
+    action: UserAction,
+}
+
 #[derive(Subcommand)]
 enum TaskAction {
     List,
 }
 
+#[derive(Subcommand)]
+enum UserAction {
+    List,
+}
+
 fn main() -> Result<()> {
-    let _args = Cli::parse();
+    let args = Cli::parse();
 
     dotenv().with_context(|| ".env ファイルが見つかりません．")?;
     let rask_api_token = env::var("RASK_API_TOKEN")
@@ -38,12 +50,28 @@ fn main() -> Result<()> {
 
     let client = Client::new();
 
-    let tasks = tasks::list_tasks(
-        &client, 
-        &rask_url,
-        &rask_api_token,
-    )?;
-    println!("{}", serde_json::to_string(&tasks)?);
+    match args.command {
+        Commands::Task(TaskCommand {
+            action: TaskAction::List,
+        }) => {
+            let tasks = tasks::list_tasks(
+                &client, 
+                &rask_url,
+                &rask_api_token,
+            )?;
+            println!("{}", serde_json::to_string(&tasks)?);
+        }
+        Commands::User(UserCommand {
+            action: UserAction::List,
+        }) => {
+            let users = tasks::list_users(
+                &client, 
+                &rask_url,
+                &rask_api_token,
+            )?;
+            println!("{}", serde_json::to_string(&users)?);
+        }
+    }
 
     Ok(())
 }
