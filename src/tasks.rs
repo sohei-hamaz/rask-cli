@@ -24,14 +24,14 @@ pub struct Project {
 pub struct Task {
     pub id: i32,
     pub content: String,
-    pub description: String,
-    pub due_at: String,
+    pub description: Option<String>,
+    pub due_at: Option<String>,
     pub created_at: String,
     pub updated_at: String,
     pub creator: Person,
     pub assigner: Person,
     pub project: Option<Project>,
-    pub tags: Vec<Tag>,
+    pub tags: Option<Vec<Tag>>,
     pub url: String,
 }
 
@@ -44,7 +44,7 @@ pub struct User {
 
 pub fn list_tasks(client: &Client, rask_url: &str, api_token: &str) -> Result<Vec<Task>> {
     let url = format!(
-        "{}/tasks.json",
+        "{}/tasks.json?all=true",
         rask_url,
     );
     let response = client
